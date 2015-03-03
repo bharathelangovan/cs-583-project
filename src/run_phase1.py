@@ -22,8 +22,7 @@ if __name__ == '__main__':
     graph, domain_labels = load_linqs_data(args.content_file, args.cites_file)
     
     kf = KFold(n=len(graph.node_list), n_folds=args.num_folds, shuffle=True, random_state=42)    
-    
-    
+
     accuracies = []
     
     cm = None
@@ -39,10 +38,6 @@ if __name__ == '__main__':
         else:
             cm += confusion_matrix(y_true, y_pred, labels = domain_labels)
 
-    
     print accuracies
     print "Mean accuracy: %0.4f +- %0.4f" % (np.mean(accuracies), np.std(accuracies))
     print cm
-        
-    
-    

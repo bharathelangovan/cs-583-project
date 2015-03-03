@@ -1,19 +1,21 @@
 from collections import defaultdict
 
+
 def abstract():
     import inspect
     caller = inspect.getouterframes(inspect.currentframe())[1][3]
     raise NotImplementedError(caller + ' must be implemented in subclass')
 
+
 class Graph(object):
-    '''
+    """
     The base Graph class
-    '''
+    """
 
     def __init__(self):
-        '''
+        """
         Create an empty graph
-        '''
+        """
         self.node_list = []
         self.edge_list = []        
     
@@ -25,6 +27,7 @@ class Graph(object):
     
     def get_neighbors(self, n):
         abstract()
+
 
 class Node(object):
     def __init__(self, node_id, feature_vector = None, label = None):
@@ -63,6 +66,7 @@ class DirectedGraph(Graph):
     def get_neighbors(self, n):
         return self.out_neighbors[n].union(self.in_neighbors[n])
 
+
 class UndirectedGraph(Graph):
     
     def __init__(self):
@@ -75,5 +79,3 @@ class UndirectedGraph(Graph):
     
     def get_neighbors(self, n):
         return self.neighbors[n]
-
-        
