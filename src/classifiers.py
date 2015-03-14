@@ -57,7 +57,7 @@ class Classifier(object):
 
     def __init__(self, scikit_classifier_name, **classifier_args):        
         classifer_class=get_class(scikit_classifier_name)
-        self.clf = classifer_class(classifier_args)
+        self.clf = classifer_class(**classifier_args)
 
     def fit(self, graph, train_indices):
         """
@@ -81,14 +81,27 @@ class LocalClassifier(Classifier):
         Create a feature list of lists (or matrix) and a label list
         (or array) and then fit using self.clf
         """
-        raise NotImplementedError('You need to implement this method')
+        feature_list = []
+        label_list = []
+        training_nodes = [graph.node_list[i] for i in train_indices]
+        for node in training_nodes:
+            feature_list.append(node.feature_vector)
+            label_list.append(node.label)
+
+        self.clf.fit(feature_list, label_list)
 
     def predict(self, graph, test_indices, conditional_node_to_label_map = None):
         """
         This function should be called only after the fit function is called.
         Use only the node attributes for prediction.
         """
-        raise NotImplementedError('You need to implement this method')
+        label_predictions = []
+
+        testing_nodes = [graph.node_list[i] for i in test_indices]
+        for node in testing_nodes:
+            label_predictions += self.clf.predict(node.feature_vector)
+
+        return label_predictions
 
 
 class RelationalClassifier(Classifier):

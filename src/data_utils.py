@@ -16,15 +16,17 @@ def parse_content_file(file_path):
 
     for line in content_file:
         content_array = line.split('\t')
+        word_attributes = content_array[1:-1]
+        integer_attributes = [int(numeric_string) for numeric_string in word_attributes]
         paper_content = {
             'paper_id': content_array[0],
             'class_label': content_array[-1].strip(),
-            'word_attributes': content_array[1:-1],
+            'word_attributes': integer_attributes,
         }
         class_labels.append(content_array[-1].strip())
         file_content.append(paper_content)
 
-    return file_content, set(class_labels)
+    return file_content, list(set(class_labels))
 
 
 def parse_cites_file(file_path):

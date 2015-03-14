@@ -9,9 +9,9 @@ import numpy as np
 if __name__ == '__main__':
 
     args = {
-        'content_file': 'Z:/Data/CS_583_Project/citeseer/citeseer.content',
-        'cites_file': 'Z:/Data/CS_583_Project/citeseer/citeseer.cites',
-        'classifier': 'sklearn.linear_model.LogisticRegression',
+        'content_file': 'C:/Users/ericf_000/Documents/Data/CS_583/cora/cora.content',
+        'cites_file': 'C:/Users/ericf_000/Documents/Data/CS_583/cora/cora.cites',
+        'classifier': 'sklearn.svm.SVC',
         'num_folds': 10,
     }
 
